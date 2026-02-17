@@ -9,6 +9,22 @@
 #define MINOR_VERSION 1
 #define PATCH 0
 
+void python(char* name) {
+  std::cout << "Creating a Python project \n";
+
+  std::filesystem::create_directory(name);
+  std::ofstream main(std::string(name) + "/main.py");
+  if(!main.is_open()) {
+    std::cout << "Failed to create main.py file" << std::endl;
+  }
+
+  main << "print(\"Hello, world!\\n\") \n";
+  std::ofstream requirements(std::string(name) + "/requirements.txt");
+  if(!requirements.is_open()) {
+    std::cout << "Failed to create requirements.txt";
+  }
+}
+
 void C(char* name) {
   std::string srcPath = (std::string)name + "/src";
   std::string includePath = (std::string)name + "/include";
@@ -93,6 +109,11 @@ void args(int argc, char* argv[]) {
     exit(EXIT_FAILURE);
   }
 
+  if(std::filesystem::exists(argv[1])) {
+    std::cout << "The directory: " << argv[1] << " already exists" << std::endl;
+    return;
+  }
+
   if (strcmp(argv[2], "-lang") == 0) {
 
     if (strcmp(argv[3], "C") == 0 ||
@@ -104,6 +125,13 @@ void args(int argc, char* argv[]) {
         strcmp(argv[3], "cpp") == 0) {
 
       CPP(argv[1]);
+
+    } else if(strcmp(argv[3], "Python") == 0 ||
+        strcmp(argv[3], "python") == 0 ||
+        strcmp(argv[3], "py") == 0 ||
+        strcmp(argv[3], "PY") == 0) {
+
+      python(argv[1]);
 
     } else {
       std::cerr << "Invalid language\n";
