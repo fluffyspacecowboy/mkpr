@@ -5,7 +5,7 @@ mkpr - a simple tool to initialize projects for different languages
   C, C++, Python
 
 ## Usage:
-mkpr <project_name> -lang <language>
+mkpr "project_name" -lang "language"
 
 ## TODO:
 Add --build support(mkpr foobar -lang C --build CMake 
