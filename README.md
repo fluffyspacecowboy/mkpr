@@ -12,6 +12,3 @@ g++ -std=c++17 src/main.cpp -o mkpr in the root folder of mkpr
 
 ## Usage:
 mkpr "project_name" -lang "language"
-
-## TODO:
-Add --build support(mkpr foobar -lang C --build CMake 
